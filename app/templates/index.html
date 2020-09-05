@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="X-UA-Compatoble" content="ie=edge"/>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap" rel="stylesheet">
+
+    </head>
+    <body style="background-color:#492dc5; font-family: 'Oswald', sans-serif;">
+
+        <div class="form-group">
+            <div class="container">
+                <nav class="d-flex">
+                <h3 id="logo" class="p-2">Quản lý đại lý</h3>
+
+                <a id="dangNhap"  class="ml-auto p-2" href="admin" data-toggle="tooltip" data-placement="bottom" title="{% if current_user.is_authenticated %} Tài khoản {% else %} Đăng nhập {% endif %}" >
+                    <img id="image-login" src="{{url_for('static', filename='img/login_logo.png')}}" alt="wallpaper">
+                </a>
+            </nav>
+            </div>
+            <section class="carousel slide" data-ride="carousel">
+
+                    <div class="carousel-inner hero">
+                        <div class="carousel-item active">
+                            <img class="d-block w-100" src="{{url_for('static', filename='img/molly-martirez-787.jpg')}}" alt="wallpaper">
+                        </div>
+                        <div class="carousel-item">
+                              <img class="d-block w-100" src="{{url_for('static', filename='img/20130921.jpg')}}" alt="Second slide">
+                        </div>
+                        <div class="carousel-item">
+                              <img class="d-block w-100" src="{{url_for('static', filename='img/download.jpg')}}" alt="Third slide">
+                        </div>
+                        <h1 class="headline">HELLO</h1>
+                    </div>
+
+            </section>
+            <div class="slider"></div>
+        </div>
+
+
+
+
+
+        <!--Time line max-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TimelineMax.min.js" 
+        integrity="sha512-0xrMWUXzEAc+VY7k48pWd5YT6ig03p4KARKxs4Bqxb9atrcn2fV41fWs+YXTKb8lD2sbPAmZMjKENiyzM/Gagw==" crossorigin="anonymous">
+        </script>
+         <!--Tween max-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js" 
+        integrity="sha512-DkPsH9LzNzZaZjCszwKrooKwgjArJDiEjA5tTgr3YX4E6TYv93ICS8T41yFHJnnSmGpnf0Mvb5NhScYbwvhn2w==" crossorigin="anonymous">
+        </script>
+        <script src="{{url_for('static', filename='js/index.js')}}"></script>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+    </body>
+</html>
