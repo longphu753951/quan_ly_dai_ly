@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Thêm cửa hàng mới</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/add_store.css')}}" type="text/css"/>
+</head>
+<body>
+{% block header %}
+    {% include 'manager/base/header.html' %}
+{% endblock %}
+    <div class="container d-flex justify-content-center" >
+        <form id="add-store-form" method="post">
+            <div class="form-group">
+                 <div class="row">
+                     <div class="col-sm">
+                       <label for="InputTenDaiLy">Tên đại lý</label>
+                        <input type="text" name="tenDaiLy" class="form-control" id="InputTenDaiLy" placeholder="Nhập tên đại lý" required>
+                     </div>
+                    <div class="col-sm">
+                        <label for="InputTel">SDT</label>
+                        <input type="tel" name="sdt" class="form-control" id="InputTel" placeholder="Nhập sdt" required>
+
+                    </div>
+                 </div>
+            </div>
+
+            <div>
+                <label for="InputEmail">Email</label>
+                <input type="email" name="email" class="form-control" id="InputEmail" placeholder="Nhập email" required>
+            </div>
+            <div>
+               <label for="InputAddress">Địa chỉ</label>
+                <input type="address" name="diachi" class="form-control" id="InputAddress" placeholder="Nhập địa chỉ" required>
+            </div>
+             <div class="form-group" id="selection_add">
+                 <div class="row">
+                     <div class="col-sm">
+                         <select name="comp_select" class="selectpicker form-control">
+                         {% for data in loaiDaiLy %}
+                            <option value={{ data.maLoai}}>{{ data.tenLoai }}</option>
+                         {% endfor %}
+                     </select>
+                     </div>
+                     <div class="col-sm">
+                         <select name="comp_select2" class="selectpicker form-control">
+                         {% for data in quan %}
+                            <option value={{ data.maQuan }}>{{ data.tenQuan }}</option>
+                         {% endfor %}
+                     </select>
+                     </div>
+
+                 </div>
+             </div>
+                {% if err_msg %}
+                    <div class="form-group">
+                        <span class="text-danger"> {{err_msg}}</span>
+                    </div>
+                {% else %}
+                {% endif %}
+            <button type="submit" class="btn btn-primary col-md-auto" id="submit">Đăng Ký</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/search_store.css')}}" type="text/css"/>
+</head>
+<body>
+    {% block header %}
+        {% include 'manager/base/header.html' %}
+    {% endblock %}
+    <div class="container-fluid">
+        <div id="search-section" class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1">
+            <form method="get">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm">
+                           <label for="ChonQuan1">Quận</label>
+                            <select name="ChonQuan" id="ChonQuan1" class="selectpicker form-control">
+                             {% for data in quan %}
+                                <option value={{ data.maQuan }}>{{ data.tenQuan }}</option>
+                             {% endfor %}
+                            </select>
+                         </div>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <button type="submit" class="btn btn-primary" id="submit">Đăng Ký</button>
+                    </div>
+                </div>
+            </form>
+            <div id="search-result" class="row form-group tableFixHead">
+                <table id="transcript-table table-responsive" class="table">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Đại lý</th>
+                            <th>Loại</th>
+                            <th>Quận</th>
+                            <th>Tiền nợ</th>
+                        </tr>
+                    </thead>
+                    <tbody style="height: 10px !important; overflow: scroll; ">
+                    {% for p in stores %}
+                        <tr>
+                            <td>
+                                {{p.id}}
+                            </td>
+                            <td>
+                                {{p.tenDaiLy}}
+                            </td>
+                            <td>
+                                {{p.loaiDaiLy_id}}
+                            </td>
+                            <td>
+                               {{p.quan_id}}
+                            </td>
+                            <td>
+                                {{p.tongTienNo}}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

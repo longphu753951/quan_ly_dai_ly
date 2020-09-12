@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Login</title>
+            <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="Login.js"></script>
+        <link rel="stylesheet" href="{{url_for('static', filename='css/LoginStyle.css')}}" type="text/css"/>
+        <script src="{{url_for('static', filename='js/adduser.js')}}"></script>
+    </head>
+    <body>
+
+        <div class="container d-flex justify-content-center" >
+
+            <form id="login-form" method="post">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm">
+                            <label for="inputTenDangNhap">Tên đăng nhập</label>
+                            <input type="text" name="tenDangNhap" class="form-control" id="inputTenDangNhap" aria-describedby="Viết tên đăng nhập" placeholder="Mời nhập tên đăng nhập" required>
+                        </div>
+                        <div class="col-sm">
+                            <label for="inputTenUser">Tên của user</label>
+                            <input type="text" name="tenUser" class="form-control" id="inputTenUser" aria-describedby="emailHelp" placeholder="Mời nhập tên của người dùng" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="InputPassword">Password</label>
+                    <input type="password" name="matKhau" class="form-control" id="InputPassword" placeholder="Password" required>
+                </div>
+                <div class="form-group">
+                    <label for="InputPasswordConfirm">Password Confirm</label>
+                    <input type="password" name="matKhauConf" class="form-control" id="InputPasswordConfirm" placeholder="Password Confirm" required>
+                </div>
+                {% if err_msg %}
+                    <div class="form-group">
+                        <span class="text-danger"> {{err_msg}}</span>
+                    </div>
+                {% else %}
+                {% endif %}
+                <div class="form-group">
+
+                </div>
+                <button type="submit" class="btn btn-primary" id="submit">Đăng Ký</button>
+            </form>
+        </div>
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>

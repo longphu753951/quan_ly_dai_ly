@@ -1,0 +1,24 @@
+#search-section{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 25px;
+    height: 500px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 5px 1px #000000;
+}
+.container-fluid{
+    padding-right: 15px;
+    padding-left: 15px;
+}
+#submit{
+    margin-top: 20px;
+}
+
+.tableFixHead          { overflow-y: auto; height: 300px; }
+.tableFixHead thead th { position: sticky; top: 0; }
+
+/* Just common table stuff. Really. */
+table  { border-collapse: collapse; width: 100%; text-align: center;}
+th, td { padding: 8px 16px; }
+th     { background:#eee; }
