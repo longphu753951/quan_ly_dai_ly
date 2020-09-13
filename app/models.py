@@ -27,7 +27,6 @@ class Quan(db.Model):
     tenQuan = Column(String(50), nullable=False)
     soDaiLiHienCo = Column(Integer, nullable=False)
     soDaiLiToiDa = Column(Integer, nullable=False)
-    dailys = relationship('DaiLy', backref='Quan', lazy=True)
 
     def __str__(self):
         return self
@@ -38,7 +37,6 @@ class LoaiDaiLy(db.Model):
     maLoai = Column(Integer, primary_key=True, autoincrement=True)
     tenLoai = Column(String(20), nullable=False)
     tienNoToiDa = Column(Integer, nullable=False)
-    dailys = relationship('DaiLy', backref='LoaiDaiLy', lazy=True)
 
     def __str__(self):
         return self
@@ -55,7 +53,6 @@ class DaiLy(db.Model):
     tongTienNo = Column(Float, nullable=True)
     quan_id = Column(Integer, ForeignKey(Quan.maQuan), nullable=False)
     loaiDaiLy_id = Column(Integer, ForeignKey(LoaiDaiLy.maLoai), nullable=False)
-    thutiens = relationship('ThuTien', backref='DaiLy', lazy=True)
 
     def __str__(self):
         return self
@@ -68,6 +65,20 @@ class CongNo(db.Model):
     noDau = Column(Float, nullable=False)
     phatSinh = Column(Float, nullable=True)
     noCuoi = Column(Float, nullable=True)
+    ma_DaiLy = Column(Integer, ForeignKey(DaiLy.id), nullable=False)
+
+    def __str__(self):
+        return self
+
+
+class DoanhSo(db.Model):
+    __tablename__ = "DoanhSo"
+    maDoanhSo = Column(Integer, primary_key=True, autoincrement=True)
+    thang = Column(DateTime, nullable=False)
+    soPhieuXuat = Column(Integer, nullable=False)
+    tongTriGia = Column(Float, nullable=True)
+    tiLe = Column(Float, nullable=True)
+    ma_DaiLy = Column(Integer, ForeignKey(DaiLy.id), nullable=False)
 
     def __str__(self):
         return self
@@ -92,8 +103,10 @@ class ThuTien(db.Model):
     ngayThu = Column(DateTime, nullable=False)
     soTien = Column(Integer, nullable=False)
     ma_DaiLy = Column(Integer, ForeignKey(DaiLy.id), nullable=False)
+
     def __str__(self):
         return self
+
 
 class MatHang(db.Model):
     __tablename__ = "MatHang"
@@ -104,7 +117,44 @@ class MatHang(db.Model):
         return self
 
 
+class PhieuXuatHang(db.Model):
+    __tablename__ = "PhieuXuatHang"
+    maPhieu = Column(Integer, primary_key=True, autoincrement=True)
+    ngayLapPhieu = Column(DateTime, nullable=False)
+    ma_DaiLy = Column(Integer, ForeignKey(DaiLy.id), nullable=False)
+
+    def __str__(self):
+        return self
+
+
+XuatHang_MatHang = db.Table("XuatHang_MatHang",
+                            Column('xuatHang_id', Integer,
+                                   ForeignKey('PhieuXuatHang.maPhieu'),
+                                   primary_key=True),
+                            Column('matHang_id', Integer,
+                                   ForeignKey('MatHang.maMatHang'),
+                                   primary_key=True),
+                            Column('donViTinh', Integer, ForeignKey('DonVi.maDonVi'),
+                                   nullable=False),
+                            Column('soLuong', Integer,
+                                   nullable=False),
+                            Column('donGia', Integer,
+                                   nullable=False),
+                            Column('thanhTien', Integer,
+                                   nullable=False),
+                            )
+
+
 class DonViModelView(ModelView):
+    def is_accessible(self):
+        return current_user.is_authenticated
+
+
+class AddUser(BaseView):
+    @expose("/")
+    def index(self):
+        return self.render("admin/adduser.html")
+
     def is_accessible(self):
         return current_user.is_authenticated
 
@@ -123,7 +173,10 @@ class LogoutView(BaseView):
 admin.add_view((DonViModelView(Quan, db.session)))
 admin.add_view((DonViModelView(LoaiDaiLy, db.session)))
 admin.add_view((DonViModelView(DonVi, db.session)))
+admin.add_view((DonViModelView(MatHang, db.session)))
+
 admin.add_view(LogoutView(name="Logout"))
+
 
 if __name__ == "__main__":
     db.create_all()

@@ -78,8 +78,20 @@ def search_Dai_Ly_By_Quan(id):
     return a
 
 
+def load_mat_hang():
+    a = db.session.execute("SELECT * FROM quan_ly_dai_ly.MatHang ;")
+    a = [p for p in a]
+    return a
+
+
 def load_Dai_Ly():
     a = db.session.execute("SELECT * FROM quan_ly_dai_ly.daily ;")
+    a = [p for p in a]
+    return a
+
+
+def load_Don_Vi():
+    a = db.session.execute("SELECT * FROM quan_ly_dai_ly.DonVi ;")
     a = [p for p in a]
     return a
 

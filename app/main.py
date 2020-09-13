@@ -73,7 +73,6 @@ def login_admin():
 
 @app.route('/ManagerIndex', methods=["post", "get"])
 def manager_index():
-
     return render_template("/manager/home_page.html")
 
 
@@ -87,7 +86,8 @@ def thu_tien():
         ngayThuTien = request.form.get("ngayThuTien")
         tienThu = request.form.get("tienThu")
         if float(tienThu) > dao.search_Tien_No_Dai_ly_By_Id(ma_daiLy):
-            return render_template("/manager/thu_tien.html", daiLy=dao.load_Dai_Ly(), err_msg="Số tiền thu vượt quá số tiền nợ")
+            return render_template("/manager/thu_tien.html", daiLy=dao.load_Dai_Ly(),
+                                   err_msg="Số tiền thu vượt quá số tiền nợ")
         else:
             dao.thuTien(diaChi=diaChi, soDienThoai=sdt, email=email, ngayThu=ngayThuTien, soTienThu=tienThu,
                         maDaiLy=ma_daiLy)
@@ -101,6 +101,14 @@ def search_store():
         quan_id = request.args.get("ChonQuan")
         return render_template("manager/search_store.html", quan=dao.load_quan(),
                                stores=dao.search_Dai_Ly_By_Quan(quan_id))
+
+
+@app.route('/XuatHang', methods=["post", "get"])
+def xuat_hang():
+    if request == "POST":
+        pass
+    return render_template("manager/xuat_hang.html", matHang=dao.load_mat_hang(), donVi=dao.load_Don_Vi()
+                           , daiLy=dao.load_Dai_Ly())
 
 
 @login.user_loader

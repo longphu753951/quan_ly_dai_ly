@@ -1,0 +1,14 @@
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="ChonDaiLy">Đại lý</label>
+                                    <select name="daiLy" class="selectpicker form-control" id="ChonDaiLy">
+                                         {% for data in daiLy %}
+                                            <option value={{ data.id }}>{{ data.tenDaiLy }}</option>
+                                         {% endfor %}
+                                    </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="InputNgay">Ngày làm phiếu</label>
+                                <input type="date" name="ngayThuTien" class="form-control" id="InputNgay" required>
+                            </div>
+                        </div>

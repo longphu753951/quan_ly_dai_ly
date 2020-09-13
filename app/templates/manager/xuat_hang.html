@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="{{url_for('static', filename='js/xuatHang.js')}}"></script>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/add_store.css')}}" type="text/css"/>
+
+</head>
+<body>
+    {% block header %}
+        {% include 'manager/base/header.html' %}
+    {% endblock %}
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Thêm hàng</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table id="transcript-table table-responsive" class="table">
+                <form method="post">
+                    <div class="form-group">
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="ChonMatHang">Mặt hàng</label>
+                                    <select name="daiLy" class="selectpicker form-control" id="ChonMatHang">
+                                         {% for data in matHang %}
+                                            <option value={{ data.maMatHang }}>{{ data.tenMatHang }}</option>
+                                         {% endfor %}
+                                    </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <label for="DonViTinh">Đơn vị tính</label>
+                                    <select name="daiLy" class="selectpicker form-control" id="DonViTinh">
+                                         {% for data in donVi %}
+                                            <option value={{ data.maDonVi }}>{{ data.vietTat }}</option>
+                                         {% endfor %}
+                                    </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-3" style="margin-left: 12px">
+                                    <label for="SoLuong">Số lượng</label>
+                                    <input type="number" name="SoLuong" class="form-control" id="SoLuong" required>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="DonGia">Đơn giá</label>
+                                    <input type="text" name="DonGia" class="form-control" id="DonGia" placeholder="Nhập đơn giá" onchange="DoiTien()" required>
+                                </div>
+                                <div class="col-sm-4">
+                                    <label for="ThanhTien">Thành Tiền</label>
+                                    <input type="text" name="ThanhTien" class="form-control" id="ThanhTien" value="" disabled required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            <button type="submit" class="btn btn-primary">Xác nhận</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+        <div id="search-section" class="col-lg-10 col-md-10 col-sm-12 col-xs-12 col-lg-offset-1 col-md-offset-1">
+            <form method="get">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm">
+                           <label for="ChonQuan1">Quận</label>
+                            <select name="ChonQuan" id="ChonQuan1" class="selectpicker form-control">
+                             {% for data in quan %}
+                                <option value={{ data.maQuan }}>{{ data.tenQuan }}</option>
+                             {% endfor %}
+                            </select>
+                         </div>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <button type="submit" class="btn btn-primary" id="submit">Đăng Ký</button>
+                    </div>
+                </div>
+            </form>
+            <div id="search-result" class="row form-group tableFixHead">
+                <table id="transcript-table table-responsive" class="table">
+                    <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Đại lý</th>
+                            <th>Loại</th>
+                            <th>Quận</th>
+                            <th>Tiền nợ</th>
+                        </tr>
+                    </thead>
+                    <tbody style="height: 10px !important; overflow: scroll; ">
+                    {% for p in stores %}
+                        <tr>
+                            <td>
+                                {{p.id}}
+                            </td>
+                            <td>
+                                {{p.tenDaiLy}}
+                            </td>
+                            <td>
+                                {{p.loaiDaiLy_id}}
+                            </td>
+                            <td>
+                               {{p.quan_id}}
+                            </td>
+                            <td>
+                                {{p.tongTienNo}}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
